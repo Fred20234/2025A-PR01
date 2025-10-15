@@ -17,7 +17,13 @@ cars_dict = {
 
 # Écrire votre code ici : 
 
-
+for color in CAR_COLORS:
+    left = pygame.image.load(f"images/car_{color}_left.png")
+    right = pygame.image.load(f"images/car_{color}_right.png")
+    left = pygame.transform.scale(left, CARS_SIZE)
+    right = pygame.transform.scale(right, CARS_SIZE)
+    cars_dict["left"].append(left)
+    cars_dict["right"].append(right)
 
 
 # ===============================================================

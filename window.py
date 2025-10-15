@@ -31,8 +31,30 @@ background_img = pygame.transform.scale(background_img, (SCREEN_WIDTH, SCREEN_HE
 # - Ajoutez la voie complète à la structure qui gère l’ensemble des voies (lanes).
 
 def add_road_lanes():
-
-
+    for i in range(4):
+        y = SCREEN_HEIGHT - (i + 1.5) * LANE_HEIGHT - CARS_SIZE[1] / 2
+        direction = i % 2
+        speed = random.randint(2, 4) * (-1) ** i
+        cars = []
+        for j in range(3):
+            x = j * 250 + 25 * random.randint(2, 6)
+            if direction == 0:
+                image = cars_dict["right"][random.randint(0, len(cars_dict["right"]) - 1)]
+            else:
+                image = cars_dict["left"][random.randint(0, len(cars_dict["left"]) - 1)]
+            cars.append({
+                "width": CARS_SIZE[0],
+                "height": CARS_SIZE[1],
+                "x": x,
+                "y": y,
+                "image": image
+            })
+        LANES.append({
+            "type": "road",
+            "speed": speed,
+            "y": y,
+            "entities": cars
+        })
 
 
 
@@ -70,10 +92,28 @@ def add_grass_lane():
 # - Ajoutez la voie complète à la structure qui gère l’ensemble des voies (lanes). 
 
 def add_river_lanes():
-    
-
-
-
+    for i in range(4):
+        y = SCREEN_HEIGHT - (i + 7) * LANE_HEIGHT
+        speed = random.randint(2, 4) * (-1) ** i
+        logs = []
+        for j in range(3):
+            size_key = random.choice(list(LOG_SIZES.keys()))
+            log_size = LOG_SIZES[size_key]
+            x = j * 250 + 25 * random.randint(2, 6)
+            log_y = y + (LANE_HEIGHT - log_size[1]) / 2
+            logs.append({
+                "width": log_size[0],
+                "height": log_size[1],
+                "x": x,
+                "y": log_y,
+                "image": logs_dict[size_key]
+            })
+        LANES.append({
+            "type": "river",
+            "speed": speed,
+            "y": y,
+            "entities": logs
+        })
 
     return
 
