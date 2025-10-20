@@ -70,7 +70,7 @@ def check_collision():
                 position = (car["x"], car["y"])
                 dimension = (car["width"], car["height"])
                 carRect = pygame.Rect(position, dimension)
-                if pygame.Rect.colliderect(frog_Rect, carRect):
+                if frog_Rect.colliderect(carRect):
                     return True
                 
     return False
@@ -101,7 +101,7 @@ def handle_logs():
         if lane["type"] == "river":
             for log in lane["entities"]:
                 log_Rect = pygame.Rect(log["x"], log["y"], log["width"], log["height"])
-                if pygame.Rect.colliderect(frog_Rect, log_Rect):
+                if frog_Rect.colliderect(log_Rect):
                     frog_dict["on_log"] = True
                     frog_dict["log_speed"] = lane["speed"]
                     return
